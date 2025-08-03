@@ -8,8 +8,12 @@ def main(article_url):
     original_headline = original_article['headline']
     new_headline = generate_headline(original_headline)
     
-    # similar_article_list = make_custom_search(query=new_headline)
-    similar_article_list = ['https://en.setopati.com/political/164318', 'https://mypeoplesreview.com/2025/07/26/former-prez-bhandari-defends-her-uml-membership/', 'https://mypeoplesreview.com/2025/07/24/chair-oli-toughens-stance-bhandari-barred-from-party-politics/']
+    ### This code uses websearch to find the similar articles ###
+    ### Its better to search only in the local news websites  ###
+    similar_article_list = make_custom_search(query=new_headline)
+    
+    ### These are the test articles ###
+    # similar_article_list = ['https://en.setopati.com/political/164318', 'https://mypeoplesreview.com/2025/07/26/former-prez-bhandari-defends-her-uml-membership/', 'https://mypeoplesreview.com/2025/07/24/chair-oli-toughens-stance-bhandari-barred-from-party-politics/']
     all_articles = []
     for url in similar_article_list:
         
@@ -30,6 +34,9 @@ def main(article_url):
 
 
 if __name__=="__main__":
+    
+    ### Add your article link here ###
+    ### This code only supports kathmandu post ###
     article_url = 'https://kathmandupost.com/politics/2025/07/23/bidya-bhandari-s-political-adventurism-hits-a-brake-for-now'
     
     average_score = main(article_url)

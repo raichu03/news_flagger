@@ -18,41 +18,30 @@ def calculate_semantic_similarity_score(claims1, claims2, similarity_threshold=0
     """
     model = SentenceTransformer('all-MiniLM-L6-v2')
 
-
-    
-    
-    # Extract claim texts from the dictionaries
     claim_texts1 = [claim['claim'] for claim in claims1['claims']]
     claim_texts2 = [claim['claim'] for claim in claims2['claims']]
 
-    # Handle cases where one or both lists are empty
     if not claim_texts1 or not claim_texts2:
         return 0.0
 
-    # Encode the claim texts into embeddings
     embeddings1 = model.encode(claim_texts1, convert_to_tensor=True)
     embeddings2 = model.encode(claim_texts2, convert_to_tensor=True)
 
     total_score = 0
     num_matched_claims = 0
 
-    # Iterate through each claim in the first list
     for i, claim1_text in enumerate(claim_texts1):
         claim1_embedding = embeddings1[i]
         
-        # Calculate cosine similarity with all claims in the second list
         similarities = util.cos_sim(claim1_embedding, embeddings2)
 
-        # Iterate through ALL similarity scores for the current claim
         for score in similarities[0]:
-            # If the score is above the threshold, include it in the calculation
             if score >= similarity_threshold:
                 total_score += score
                 num_matched_claims += 1
 
-    # Calculate the average score
     if num_matched_claims > 0:
         final_score = total_score / num_matched_claims
-        return final_score.item()  # Convert tensor to float
+        return final_score.item()
     else:
         return 0.0

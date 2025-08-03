@@ -42,10 +42,3 @@ def extract_text_from_class(url):
         return {'error': f"Request failed: {str(e)}"}
     except Exception as e:
         return {'error': f"An error occurred: {str(e)}"}
-
-# Example usage
-if __name__ == "__main__":
-    url = "https://kathmandupost.com/politics/2025/07/23/bidya-bhandari-s-political-adventurism-hits-a-brake-for-now"  # Replace with your target URL
-    result = extract_text_from_class(url)
-    
-    print(result)
